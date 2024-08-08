@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box{
+            background-color:lightcoral;
+            height: 350px;
+            width: 550px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        input{
+            height: 35px;
+            width: 350px;
+        }
+        button{
+            height: 40px;
+            margin: 50px;
+            border-radius: 5px;
+            background-color: antiquewhite;
+        }
+        button:hover{
+            background-color:chartreuse;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+         <h1>Password Generator</h1>
+         <input type="text" id="one">
+         <br><br>
+         <button id="gen">generatePassword</button>
+         <button id="copy">Copy</button>
+
+    </div>
+  <script>
+    
+        function generatePassword(length = 12) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+            return Array.from({ length }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+        }
+
+        document.getElementById('gen').addEventListener('click', () => {
+            const password = generatePassword();
+            document.getElementById('one').value = password;
+        });
+
+        document.getElementById('copy').addEventListener('click', () => {
+            const input = document.getElementById('one');
+            if (input.value) {
+                input.select();
+                document.execCommand('copy');
+                alert('Password copied to clipboard!');
+            } else {
+                alert('No password to copy. Generate one first.');
+            }
+        });
+  </script>
+        
+
+
+  
+</body>
+</html>
